@@ -1,0 +1,14 @@
+#apenas para validar
+
+node{
+    stage('build'){
+        sh 'python3 -V'
+    }
+    stage('test'){
+        git 'https://github.com/quisenjr/formativa1.git'
+        sh 'python3 hello.py' 
+    }
+    stage('deploy'){
+        echo "finished :D"
+    }
+}

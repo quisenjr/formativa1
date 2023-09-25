@@ -1,0 +1,35 @@
+#pipeline - version 3
+
+node {
+    stage('Checkout') {
+        git 'https://github.com/quisenjr/formativa1.git'
+    }
+
+    stage('Setup') {
+        sh 'pip3 install bandit'
+    }
+
+    stage('Build') {
+        sh 'python3 -V'
+    }
+
+    stage('Run Application') {
+        sh 'python3 hello.py'
+    }
+
+    stage('Run Bandit') {
+        sh 'bandit hello.py'
+    }
+
+    stage('Notify Telegram') {
+        sh '''
+        curl -s -X POST https://api.telegram.org/bot6246604688:AAEWv-UanIcOe1yu7eg0vuohpoVWpETyn9k/sendMessage \
+        -d chat_id=471982768 \
+        -d text="Build and Tests are successful. Deploying now."
+        '''
+    }
+
+    stage('Deploy') {
+        echo 'Deploy stage: finished :D'
+    }
+}

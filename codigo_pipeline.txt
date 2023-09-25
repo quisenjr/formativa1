@@ -1,6 +1,4 @@
-#apenas para validar o codigo
-
-#alterando para validar a webhook
+#pipeline v1
 
 node{
     stage('build'){
